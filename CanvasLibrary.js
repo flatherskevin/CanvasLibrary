@@ -26,6 +26,7 @@ function IDContext(ctxID){
 //x, y: respective cartesian cordinates
 //h, w: height and width
 //l   : length
+//r   : radius
 function RectCenter(ctxID,x,y,h,w){
 	ctx = IDContext(ctxID);
 	ctx.beginPath();
@@ -99,12 +100,34 @@ function TriIsosceles(ctxID,x,y,h,w){
 	ctx.closePath();
 }
 
+//General triangle based entirely on vertices' locations
 function Triangle(ctxID,x,y,x_1,y_1,x_2,y_2){
 	ctx = IDContext(ctxID);
 	ctx.beginPath();
 	ctx.moveTo(x, y);
-	ctx.lineTo(x_1, y_1);
+	ctx.lineTo(x_1, y_1); 
 	ctx.lineTo(x_2, y_2);
 	ctx.lineTo(x, y);
+	ctx.closePath();
+}
+
+//Gernal circle postioned from center
+function Circle(ctxID,x,y,r){
+	ctx = IDContext(ctxID);
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.arc(x, y, r, 0, Math.Pi * 2);
+	ctx.closePath();
+}
+
+
+//Starts at 9 o'clock position and creates an ellipse
+function Ellipse(ctxID,x,y,h,w){
+	ctx = IDContext(ctxID);
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.bezierCurveTo(x, y + h, x + w, y + h, x + w, y);
+	ctx.moveTo(x, y);
+	ctx.bezierCurveTo(x, y - h, x + w, y - h, x + w, y);
 	ctx.closePath();
 }
