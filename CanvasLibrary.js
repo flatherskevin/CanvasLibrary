@@ -121,7 +121,7 @@ function Circle(ctxID,x,y,r){
 }
 
 
-//Starts at 9 o'clock position and creates an ellipse
+//Starts at 9 o'clock, or 3 o'clock, position and creates an ellipse
 function Ellipse(ctxID,x,y,h,w){
 	ctx = IDContext(ctxID);
 	ctx.beginPath();
@@ -129,5 +129,30 @@ function Ellipse(ctxID,x,y,h,w){
 	ctx.bezierCurveTo(x, y + h, x + w, y + h, x + w, y);
 	ctx.moveTo(x, y);
 	ctx.bezierCurveTo(x, y - h, x + w, y - h, x + w, y);
+	ctx.closePath();
+}
+
+//Racetrack shape. Set vert to true for arcs to be aligned vertically; set to false for horizontal
+function RaceTrack(ctxID,x,y,h,w,vert){
+	ctx = IDContext(ctxID);
+	ctx.beginPath();
+	switch (){
+		case true:
+			ctx.moveTo(x + w / 2, y + h / 2);
+			ctx.lineTo(x - w / 2, y + h / 2);
+			ctx.moveTo(x - w / 2, y - h / 2);
+			ctx.lineTo(x + w / 2, y - h / 2);
+			ctx.arc(x, y - h / 2, w / 2, Math.PI, Math.PI * 2);
+			ctx.arc(x, y + h / 2, w / 2, Math.PI, 0);
+			break;
+		case false:
+			ctx.moveTo(x - w / 2, y + h / 2);
+			ctx.lineTo(x + w / 2, y + h / 2);
+			ctx.moveTo(x + w / 2, y - h / 2);
+			ctx.lineTo(x - w / 2, y - h / 2);
+			ctx.arc(x - w / 2, y, h / 2, Math.PI / 2, 3 / 2 * Math.PI);
+			ctx.arc(x + w / 2, y, h / 2, Math.PI / 2, 3 / 2 * Math.PI);
+			break;
+	}
 	ctx.closePath();
 }
